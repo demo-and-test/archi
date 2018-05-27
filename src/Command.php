@@ -39,7 +39,7 @@ class Command extends BaseCommand
         $days = $input->getOption('days');
         $finder->files()->in($directory)
                         ->files()
-                        ->date("<= now - {$days} days");
+                        ->date("< now - {$days} days");
 
         // we could use `CompressInterface`
         // and fetch it from DI container, but we don't need such complex logic atm
