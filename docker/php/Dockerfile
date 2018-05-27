@@ -9,9 +9,10 @@ RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt
 RUN apt-get update
 
 RUN apt-get install -y php7.2-cli php7.2-zip php7.2-xml php7.2-mbstring git unzip
-                   
+
 RUN wget "https://getcomposer.org/download/1.6.5/composer.phar" -q -O /bin/composer && chmod +x /bin/composer
 
+WORKDIR "/app"
 CMD if [ ! -d "/app/vendor" ] ; \
     then composer install -d /app ; \
     fi ; \

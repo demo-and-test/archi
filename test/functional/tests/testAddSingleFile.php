@@ -3,7 +3,10 @@
 use PHPUnit\Framework\Assert;
 
 $fs = new \Symfony\Component\Filesystem\Filesystem();
-$fs->touch(ARCHI_TEST_DIR . '/file');
+$fs->touch(
+    ARCHI_TEST_DIR . '/file',
+    strtotime("now - 30 days")
+);
 
 $process = new Symfony\Component\Process\Process(
     ARCHI_COMMAND . ' ' . ARCHI_TEST_DIR .  ' ' . ARCHI_TEST_DIR_RESULT . '/1.zip'

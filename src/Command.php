@@ -18,8 +18,15 @@ class Command extends BaseCommand
     {
         $this->setName('archi')
              ->setDescription('archive old files')
+             ->addOption(
+                'days',
+                'd',
+                \Symfony\Component\Console\Input\InputOption::VALUE_OPTIONAL,
+                'Archive files older than given days',
+                30
+             )
              ->addArgument('directory', InputArgument::REQUIRED, 'Directory to archive')
-             ->addArgument('filepath', InputArgument::REQUIRED, 'filepath for the created archve');
+             ->addArgument('filepath', InputArgument::REQUIRED, 'Archve filepath');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -29,10 +36,13 @@ class Command extends BaseCommand
         $output->writeln("Scanning {$directory}");
 
         $finder = new Finder();
+        $days = $input->getOption('days');
         $finder->files()->in($directory)
-                        ->date('> now - 30 days'); // @TODO make days configurable?
+                        ->files()
+                        ->date("<= now - {$days} days");
 
-        // this could be fetched from DI container, but we don't need such complex logic atm
+        // we could use `CompressInterface`
+        // and fetch it from DI container, but we don't need such complex logic atm
         $zipArchive = new ZipArchiveCompressor($input->getArgument('filepath'));
 
         foreach ($finder as $file) {

@@ -27,10 +27,7 @@ Assert::assertTrue(
 $zipArchive = new ZipArchive();
 $zipArchive->open(ARCHI_TEST_DIR_RESULT . '/1.zip');
 
-Assert::assertSame(2, $zipArchive->numFiles);
+Assert::assertSame(1, $zipArchive->numFiles);
 
 $file0 = $zipArchive->statIndex(0);
-Assert::assertSame('file', $file0['name']);
-
-$file1 = $zipArchive->statIndex(1);
-Assert::assertSame('file1', $file1['name']);
+Assert::assertSame('file-old', $file0['name']);

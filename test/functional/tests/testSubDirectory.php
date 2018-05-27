@@ -4,7 +4,7 @@ use PHPUnit\Framework\Assert;
 
 $fs = new \Symfony\Component\Filesystem\Filesystem();
 $fs->mkdir(ARCHI_TEST_DIR . '/d');
-$fs->touch(ARCHI_TEST_DIR . '/d/file');
+$fs->touch(ARCHI_TEST_DIR . '/d/file', strtotime('now - 40 days'));
 
 $process = new Symfony\Component\Process\Process(
     ARCHI_COMMAND . ' ' . ARCHI_TEST_DIR .  ' ' . ARCHI_TEST_DIR_RESULT . '/1.zip'
