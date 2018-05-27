@@ -5,7 +5,7 @@ use PHPUnit\Framework\Assert;
 $fs = new \Symfony\Component\Filesystem\Filesystem();
 $fs->touch(
     ARCHI_TEST_DIR . '/file',
-    strtotime("now - 30 days") - 1 // restriction is 30 days, not inclusive
+    strtotime("now - 30 days") - 5 // 29 days 23h 59min and 55 sec old file. 5 sec should be enough for execution time
 );
 
 $process = new Symfony\Component\Process\Process(
