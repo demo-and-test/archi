@@ -13,9 +13,7 @@ define('ARCHI_TEST_DIR_RESULT', '/tmp/test-result');
 
 $fs = new \Symfony\Component\Filesystem\Filesystem();
 
-
 foreach ($finder as $file) {
-
     $fs->remove(ARCHI_TEST_DIR);
     $fs->remove(ARCHI_TEST_DIR_RESULT);
     $fs->mkdir(ARCHI_TEST_DIR);
