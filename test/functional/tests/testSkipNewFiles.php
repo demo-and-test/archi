@@ -6,12 +6,12 @@ $fs = new \Symfony\Component\Filesystem\Filesystem();
 $fs->touch(ARCHI_TEST_DIR . '/file');
 $fs->touch(
     ARCHI_TEST_DIR . '/file-old',
-    time() - 60 * 60 * 24 * 30 - 1 // restriction is older than 30 days
+    time() - 60 * 60 * 24 * 30 - 1 // 30 days and 1 sec old file
 );
 
 $fs->touch(
     ARCHI_TEST_DIR . '/file1',
-    time() - 60 * 60 * 24 * 30 // restriction is older than 30 days
+    time() - 60 * 60 * 24 * 30 + 5 // 29 days 23h 59min and 55 sec old file. 5 sec should be enough for execution time
 );
 
 $process = new Symfony\Component\Process\Process(
